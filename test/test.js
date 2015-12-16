@@ -29,6 +29,12 @@ f.call(A);
 //pp.then(onComplete).catch(onError);
 */
 
+var fs = require('fs');
+
+
+
+var image = fs.readFileSync('c://src_mreshet/node/test.jpg');
+
 var base            = require('../lib/index');
 
 var MimeBuilder             = base.MimeBuilder;
@@ -52,13 +58,14 @@ var req2 = new RequestBuilder().url('http://127.0.0.1:8888')
 
 
 //request 3
-let json = JSON.stringify({thisis:'test'});
+let json = JSON.stringify({'title':'test'});
 
 let mp_body = new MultiPartBuilder().addPart(RequestBody.create(json,  new MimeBuilder().contentType('application/json', 'charset', 'UTF-8').build()))
-                                    .addPart(RequestBody.create('raw data', new MimeBuilder().contentType('image/jpeg').contentTransferEncoding('binary').build()))
+                                    .addPart(RequestBody.create(image, new MimeBuilder().contentType('image/jpeg').contentTransferEncoding('binary').build()))
                                     .type(MultiPartBuilder.FORMDATA).build();
 
-var req3 = new RequestBuilder().url('http://127.0.0.1:8888')
+var req3 = new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart')
+                               .header('Authorization', 'Bearer ya29.TAIWYl-tlbNcrhLfNPWuWZyqOMIZWKEDVJ2OhfWseWlqTMWGBO7KGGqIFTSbv9ritsfk')
                                .POST(mp_body)
                                .build().execute().then(onComplete).catch(onError);
 
