@@ -1,7 +1,7 @@
 'use strict';
 
 import RequestBody from '../RequestBody';
-import MimeBuilder from '../builders/MimeBuilder';
+import MimeBuilder from './MimeBuilder';
 
 const _query = Symbol();
 
@@ -26,7 +26,7 @@ export default class FormEncodingBuilder {
      */
     add(name, value)
     {
-        if(_query.length > 0)
+        if(this[_query].length > 0)
             this[_query] += "&";
 
         this[_query] += name + "=" + value;
@@ -40,7 +40,7 @@ export default class FormEncodingBuilder {
      * @return {RequestBody} request <code>RequestBody</code> instance
      */
     build() {
-        return RequestBody.create(_query, new MimeBuilder().contentType("application/x-www-form-urlencoded").build());
+        return RequestBody.create(this[_query], new MimeBuilder().contentType("application/x-www-form-urlencoded").build());
     }
 
 }

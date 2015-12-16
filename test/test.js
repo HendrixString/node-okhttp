@@ -31,14 +31,40 @@ f.call(A);
 
 var base            = require('../lib/index');
 
-var MimeBuilder     = base.MimeBuilder;
-var Request         = base.Request;
-var RequestBody     = base.RequestBody;
-var RequestBuilder  = base.RequestBuilder;
+var MimeBuilder             = base.MimeBuilder;
+var Request                 = base.Request;
+var RequestBody             = base.RequestBody;
+var RequestBuilder          = base.RequestBuilder;
+var FormEncodingBuilder     = base.FormEncodingBuilder;
+var MultiPartBuilder        = base.MultiPartBuilder;
 
-var req = new RequestBuilder().url('http://127.0.0.1:8888').header('Transfer-Encoding', 'chunked').header('X-MEN', 'tomer')
-                              .POST(RequestBody.create({a:'a1', b:'b1'}, new MimeBuilder().contentType('application/json', 'charset', 'utf8').build()))
-                              .build().execute().then(onComplete).catch(onError);
+// request1
+var req = new RequestBuilder().url('http://127.0.0.1:8888')
+    .POST(RequestBody.create({a:'a1', b:'b1'}, new MimeBuilder().contentType('application/json', 'charset', 'utf8').build()))
+    .build().execute().then(onComplete).catch(onError);
+
+//request 2
+let fe_body = new FormEncodingBuilder().add('key1', 'value1').add('key2', 'value2').build();
+
+var req2 = new RequestBuilder().url('http://127.0.0.1:8888')
+    .POST(fe_body)
+    .build().execute().then(onComplete).catch(onError);
+
+
+//request 3
+let json = JSON.stringify({thisis:'test'});
+
+let mp_body = new MultiPartBuilder().addPart(RequestBody.create(json,  new MimeBuilder().contentType('application/json', 'charset', 'UTF-8').build()))
+                                    .addPart(RequestBody.create('raw data', new MimeBuilder().contentType('image/jpeg').contentTransferEncoding('binary').build()))
+                                    .type(MultiPartBuilder.FORMDATA).build();
+
+var req3 = new RequestBuilder().url('http://127.0.0.1:8888')
+                               .POST(mp_body)
+                               .build().execute().then(onComplete).catch(onError);
+
+
+
+
 //var req = new RequestBuilder().GET('http://127.0.0.1:8888').build().execute().then(onComplete).catch(onError);
 
 

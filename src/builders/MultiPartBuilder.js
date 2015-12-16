@@ -1,14 +1,14 @@
 'use strict';
 
 import RequestBody from '../RequestBody';
+import MimeBuilder from './MimeBuilder';
 
 const MULTIPART_MARK        = '--';
 const LF                    = '\r\n';
-var _boundary               = '----------196f00b77b968397849367c61a2080';
 
-var _content = Symbol();
-
-var _type   = Symbol();
+var _boundary               = Symbol();
+var _content                = Symbol();
+var _type                   = Symbol();
 
 /**
  * a simple multi part builder. use it for <code>multipart</code> content types,
@@ -19,11 +19,12 @@ var _type   = Symbol();
 export default class MultiPartBuilder {
 
     /**
-     *
+     * @param {String} boundary the boundary of the parts
      */
-    constructor() {
+    constructor(boundary = '----------196f00b77b968397849367c61a2080') {
         this[_content]  = null;
         this[_type]     = MultiPartBuilder.FORMDATA;
+        this[_boundary] = boundary;
     }
 
     /**
@@ -37,18 +38,18 @@ export default class MultiPartBuilder {
      */
     addPart(body)
     {
-        var mimes_str = body.mimesToString();
+        var mimes_str       = body.mimesToString();
 
-        var body_1 = new Buffer(MULTIPART_MARK + _boundary + LF + mimes_str + LF, 'utf8');
-        var body_2 = body.content;
-        var body_3 = new Buffer(LF, 'utf8');
+        var body_1          = new Buffer(MULTIPART_MARK + this[_boundary] + LF + mimes_str + LF, 'utf8');
+        var body_2          = new Buffer(body.content);
+        var body_3          = new Buffer(LF, 'utf8');
 
-        var buff_result = Buffer.concat([body_1, body_2, body_3]);
+        var buff_result     = Buffer.concat([body_1, body_2, body_3]);
 
         if(this[_content])
-            this[_content] = Buffer.concat([this[_content], buff_result]);
+            this[_content]  = Buffer.concat([this[_content], buff_result]);
         else
-            this[_content] = buff_result;
+            this[_content]  = buff_result;
 
         return this;
     }
@@ -83,24 +84,11 @@ export default class MultiPartBuilder {
      */
     build() {
         if(this[_content])
-            this[_content] = Buffer.concat([this[_content], new Buffer(MULTIPART_MARK + _boundary + MULTIPART_MARK + LF, 'utf8')]);
+            this[_content] = Buffer.concat([this[_content], new Buffer(MULTIPART_MARK + this[_boundary] + MULTIPART_MARK + LF, 'utf8')]);
 
         //var res:String = _content.toString();
 
-        return RequestBody.create(this[_content], new MimeBuilder().contentType(this[_type] + ";boundary=" + _boundary).build());
-    }
-
-    /**
-     * the boundary of the parts
-     */
-    get boundary() { return _boundary; }
-
-    /**
-     * @private
-     */
-    set boundary(value)
-    {
-        _boundary = value;
+        return RequestBody.create(this[_content], new MimeBuilder().contentType(this[_type] + ";boundary=" + this[_boundary]).build());
     }
 
     /**
