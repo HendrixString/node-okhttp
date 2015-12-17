@@ -7,10 +7,21 @@ const url           = require('url');
 const http          = require('http');
 const https         = require('https');
 
-    const TAG       = 'HttpRequestProcess:: ';
+const TAG           = 'HttpRequestProcess:: ';
 
 var _request        = Symbol();
 var _node_request   = Symbol();
+var _response       = Symbol();
+var _data           = Symbol();
+
+class Response {
+
+    constructor() {
+
+    }
+
+}
+
 
 /**
  * internal driver/process for the HTTP request
@@ -24,21 +35,26 @@ export default class HttpRequestProcess extends BaseWorker
      * @param {String}  $id             id
      * @param {*}       $priorityKey    priority
      */
-    constructor($request, $id = 0, $priorityKey = 0) {
+    constructor($request, $id = '0', $priorityKey = 0) {
         super($id, $priorityKey);
 
         this[_request]          = $request;
         this[_node_request]     = null;
+        this[_response]         = null;
+        this[_data]             = null;
     }
 
     /**
      * process the HTTP request
      *
-     * @param {Function} onComplete completion callback(data)
+     * @param {Function} onComplete completion callback(data, response)
      * @param {Function} onError    error handler(err)
      */
     process(onComplete, onError) {
         super.process(onComplete, onError);
+
+        this[_data]         = null;
+        this[_response]     = null;
 
         let self            = this;
         let request         = this.request;
@@ -51,7 +67,10 @@ export default class HttpRequestProcess extends BaseWorker
 
         let headers         = body ? Object.assign(request.headers, body.mimes) : Object.assign({}, request.headers);
 
+        // data read from the response body
         let response_data   = null;
+        // the response, only referenced when 'response' event fired.
+        let response        = null;
 
         let options         = {
             hostname:   hostname,
@@ -67,6 +86,8 @@ export default class HttpRequestProcess extends BaseWorker
             // mangled if you simply pulled the Buffers directly and called buf.toString(encoding) on them.
             // If you want to read the data as strings, always use this method.
             //
+
+            self[_response] = res;
 
             if(request.responseEncoding)
                 res.setEncoding(request.responseEncoding);
@@ -102,9 +123,10 @@ export default class HttpRequestProcess extends BaseWorker
 
         function response_onEnd() {
             // if it is an <code>Array</code>, then it is an array of buffers. Therefore merge them
-            response_data = Array.isArray(response_data) ? Buffer.concat(response_data) : response_data;
+            response_data   = Array.isArray(response_data) ? Buffer.concat(response_data) : response_data;
+            self[_data]     = response_data;
 
-            self.notifyComplete(response_data);
+            self.notifyComplete(self);
 
             console.log(TAG + 'No more data in response.')
         }
@@ -152,6 +174,22 @@ export default class HttpRequestProcess extends BaseWorker
      */
     get request() {
         return this[_request];
+    }
+
+    /**
+     *
+     * @return {Buffer|String} return the response body
+     */
+    get data() {
+        return this[_data];
+    }
+
+    /**
+     *
+     * @return {http.IncomingMessage} return the response, where you can read statusCode and headers.
+     */
+    get response() {
+        return this[_response];
     }
 
 }

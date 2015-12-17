@@ -7,7 +7,7 @@ var Reb = main.RequestBody;
 (new Reb()).test();*/
 'use strict';
 function onComplete(msg) {
-    console.log('onComplete::: ' + msg);
+    console.log('onComplete::: ' + msg.data + ' ****** ' + msg.response.statusCode);
 }
 function onError(msg) {
     console.log('onError::: ' + msg);
@@ -28,6 +28,8 @@ f.call(A);
 //let pp = new Promise(a.b);
 //pp.then(onComplete).catch(onError);
 */
+
+
 
 var fs = require('fs');
 
@@ -67,7 +69,7 @@ let mp_body = new MultiPartBuilder().addPart(RequestBody.create(json,  new MimeB
 var req3 = new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart')
                                .header('Authorization', 'Bearer ya29.TAIWYl-tlbNcrhLfNPWuWZyqOMIZWKEDVJ2OhfWseWlqTMWGBO7KGGqIFTSbv9ritsfk')
                                .POST(mp_body)
-                               .build().execute().then(onComplete).catch(onError);
+                               .execute().then(onComplete).catch(onError);
 
 
 

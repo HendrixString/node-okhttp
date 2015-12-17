@@ -12,6 +12,7 @@ const _query = Symbol();
  * @author Tomer Shalev
  */
 export default class FormEncodingBuilder {
+
     constructor() {
         this[_query] = '';
     }

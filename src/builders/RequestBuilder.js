@@ -31,6 +31,15 @@ export default class RequestBuilder {
     }
 
     /**
+     * build and execute the request
+     *
+     * @return {Promise} a promise instance for the async HTTP task.
+     */
+    execute() {
+        return this.build().execute();
+    }
+
+    /**
      * add a new Header to the request.
      *
      * @param {String} name the name of the header

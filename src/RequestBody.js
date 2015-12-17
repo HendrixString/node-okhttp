@@ -1,8 +1,10 @@
 'use strict';
 
-const LF                    = '\r\n';
+import {mimeStringArrayToObject} from './utils/FormatUtils';
 
-var _mimes   = Symbol();//URLRequestMethod.GET;
+const LF     = '\r\n';
+
+var _mimes   = Symbol();
 var _content = Symbol();
 
 /**
@@ -15,8 +17,8 @@ export default class RequestBody {
     //noinspection JSUnusedGlobalSymbols
 
     constructor() {
-        this[_mimes] = {};
-        this[_content] = null;
+        this[_mimes]    = {};
+        this[_content]  = null;
     }
 
     test(){
@@ -27,14 +29,15 @@ export default class RequestBody {
      * create a body with a content/mime type
      *
      * @param {Buffer|String|Object} content <code>Buffer, String or Object</code> (or anything that has <code>.toString()</code>)
-     * @param {Object} mimes key/value object of <code>MIME</code> headers, use MimeBuilder
+     * @param {Object|Array} mimes key/value object of <code>MIME</code> headers, use {@link MimeBuilder}. or rest parameters string array
+     *                             of mime headers
      *
      * @return {RequestBody} a new request body
      *
      * @see MimeBuilder
      *
      */
-    static create(content, mimes) {
+    static create(content, ...mimes) {
         let rb = new RequestBody();
 
         if(Buffer.isBuffer(content)) {
@@ -47,7 +50,16 @@ export default class RequestBody {
             rb.content = JSON.stringify(content);
         }
 
-        rb.mimes = mimes;
+        rb.mimes = {};
+
+        if(mimes && mimes.length) {
+            if(typeof mimes[0] === 'string')
+                rb.mimes = mimeStringArrayToObject(mimes);
+            else
+                rb.mimes = mimes;
+        }
+
+        //console.log(rb.mimes);
 
         return rb;
     }

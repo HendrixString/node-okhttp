@@ -56,7 +56,7 @@ export default class BaseWorker {
      *
      * @param {*} res a response
      */
-    notifyComplete(res = null) {
+    notifyComplete(res) {
         var res = res ? res : this;
 
         if(typeof this[_onComplete] === 'function')

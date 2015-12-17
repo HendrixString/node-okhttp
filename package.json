@@ -1,16 +1,28 @@
 {
-  "name": "ok-http-node",
+  "name": "okhttp",
   "version": "1.0.0",
-  "description": "inspired http client for node",
+  "description": "http client for node, inspired by Square's Android OkHttp",
+  "ketwords": [
+    "okhttp",
+    "babel",
+    "node",
+    "hendrixstring"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "test": "node test/test.js",
     "build": "babel src --out-dir lib"
   },
   "author": "Tomer Shalev",
-  "license": "ISC",
+  "license": "Apache 2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HendrixString/node-okhttp.git"
+  },
   "devDependencies": {
+    "babel-cli": "^6.3.17",
     "babel-plugin-transform-object-assign": "^6.3.13",
     "babel-preset-es2015": "^6.1.18"
-  }
+  },
+  "homepage": "https://github.com/HendrixString/node-okhttp"
 }
