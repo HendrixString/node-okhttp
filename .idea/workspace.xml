@@ -5,16 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="555ffed9-c301-4b68-b059-0b784c249068" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/RequestBody.js" afterPath="$PROJECT_DIR$/lib/RequestBody.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/builders/RequestBuilder.js" afterPath="$PROJECT_DIR$/lib/builders/RequestBuilder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/BaseWorker.js" afterPath="$PROJECT_DIR$/lib/core/BaseWorker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/HttpRequestProcess.js" afterPath="$PROJECT_DIR$/lib/core/HttpRequestProcess.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/utils/FormatUtils.js" afterPath="$PROJECT_DIR$/lib/utils/FormatUtils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/RequestBody.js" afterPath="$PROJECT_DIR$/src/RequestBody.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/builders/RequestBuilder.js" afterPath="$PROJECT_DIR$/src/builders/RequestBuilder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/HttpRequestProcess.js" afterPath="$PROJECT_DIR$/src/core/HttpRequestProcess.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test.js" afterPath="$PROJECT_DIR$/test/test.js" />
     </list>
     <ignored path="ok-http-node.iws" />
@@ -36,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.8296089">
+              <caret line="45" column="81" selection-start-line="45" selection-start-column="81" selection-end-line="45" selection-end-column="81" />
               <folding />
             </state>
           </provider>
@@ -78,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RequestBuilder.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RequestBuilder.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/builders/RequestBuilder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2821229">
-              <caret line="35" column="120" selection-start-line="35" selection-start-column="120" selection-end-line="35" selection-end-column="120" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="120" column="5" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -185,8 +175,8 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/RequestBody.js" />
         <option value="$PROJECT_DIR$/src/core/HttpRequestProcess.js" />
-        <option value="$PROJECT_DIR$/test/test.js" />
         <option value="$PROJECT_DIR$/src/builders/RequestBuilder.js" />
+        <option value="$PROJECT_DIR$/test/test.js" />
       </list>
     </option>
   </component>
@@ -980,18 +970,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test.js">
+    <entry file="file://$PROJECT_DIR$/src/builders/RequestBuilder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="58" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="58" />
+          <caret line="120" column="5" selection-start-line="120" selection-start-column="5" selection-end-line="120" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/builders/RequestBuilder.js">
+    <entry file="file://$PROJECT_DIR$/test/test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2821229">
-          <caret line="35" column="120" selection-start-line="35" selection-start-column="120" selection-end-line="35" selection-end-column="120" />
+        <state vertical-scroll-proportion="0.8296089">
+          <caret line="45" column="81" selection-start-line="45" selection-start-column="81" selection-end-line="45" selection-end-column="81" />
           <folding />
         </state>
       </provider>

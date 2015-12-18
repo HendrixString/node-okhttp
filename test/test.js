@@ -43,5 +43,5 @@ let mp_body = new MultiPartBuilder().addPart(RequestBody.create(json, 'Content-T
                                     .type(MultiPartBuilder.FORMDATA).build();
 
 var req3 = new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart')
-                               .header('Authorization', 'Bearer ya29.TgLsOizI1Jsu20td_jo7qgbxPCibgVGZzQwy0LGbXeTPWxRNJboJtSc_KdvpFaKeU7Xj')
+                               .header('Authorization', 'Bearer OAUTH2_TOKEN_HERE')
                                .POST(mp_body).buildAndExecute().then(onComplete).catch(onError);
