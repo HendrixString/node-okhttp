@@ -118,7 +118,7 @@ export default class HttpRequestProcess extends BaseWorker
                 response_data += chunk;
             }
 
-            console.log(TAG + 'response_onData');
+            //console.log(TAG + 'response_onData');
         }
 
         function response_onEnd() {

@@ -56,7 +56,7 @@ export default class RequestBody {
             if(typeof mimes[0] === 'string')
                 rb.mimes = mimeStringArrayToObject(mimes);
             else
-                rb.mimes = mimes;
+                rb.mimes = mimes[0];
         }
 
         //console.log(rb.mimes);

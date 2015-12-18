@@ -33,9 +33,9 @@ export default class RequestBuilder {
     /**
      * build and execute the request
      *
-     * @return {Promise} a promise instance for the async HTTP task.
+     * @return {Promise} a promise instance for the async HTTP task. callback returns a {response, data, request} object
      */
-    execute() {
+    buildAndExecute() {
         return this.build().execute();
     }
 

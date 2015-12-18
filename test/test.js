@@ -1,11 +1,5 @@
-/*var main = require('../index');
-console.log(main)
-var Re = main.Request;
-var Reb = main.RequestBody;
-
-(new Re()).test();
-(new Reb()).test();*/
 'use strict';
+
 function onComplete(msg) {
     console.log('onComplete::: ' + msg.data + ' ****** ' + msg.response.statusCode);
 }
@@ -13,31 +7,12 @@ function onError(msg) {
     console.log('onError::: ' + msg);
 }
 
-/*
-var A = function(){
-    this.a = function() {this.c ='c1'};
-    this.b = function(on1, on2) {this.c ='c2'; on1(this.c)}
-};
+const fs                    = require('fs');
+const path                  = require('path');
 
-let a = new A();
-a.a();
-console.log(a.b);
+var image                   = fs.readFileSync(path.resolve(__dirname, 'test.jpg'));
 
-let f =  a.b;
-f.call(A);
-//let pp = new Promise(a.b);
-//pp.then(onComplete).catch(onError);
-*/
-
-
-
-var fs = require('fs');
-
-
-
-var image = fs.readFileSync('c://src_mreshet/node/test.jpg');
-
-var base            = require('../lib/index');
+var base                    = require('../lib/index');
 
 var MimeBuilder             = base.MimeBuilder;
 var Request                 = base.Request;
@@ -46,34 +21,27 @@ var RequestBuilder          = base.RequestBuilder;
 var FormEncodingBuilder     = base.FormEncodingBuilder;
 var MultiPartBuilder        = base.MultiPartBuilder;
 
-// request1
-var req = new RequestBuilder().url('http://127.0.0.1:8888')
-    .POST(RequestBody.create({a:'a1', b:'b1'}, new MimeBuilder().contentType('application/json', 'charset', 'utf8').build()))
-    .build().execute().then(onComplete).catch(onError);
+// Simple GET
+new RequestBuilder().GET('http://google.com').buildAndExecute().then(onComplete).catch(onError);
 
-//request 2
+// Simple JSON POST
+new RequestBuilder().url('http://httpbin.org/post')
+                    .POST(RequestBody.create({a:'a1', b:'b1'}, new MimeBuilder().contentType('application/json', 'charset', 'utf8').build()))
+                    .buildAndExecute().then(onComplete).catch(onError);
+
+// Form Encoding POST
 let fe_body = new FormEncodingBuilder().add('key1', 'value1').add('key2', 'value2').build();
 
-var req2 = new RequestBuilder().url('http://127.0.0.1:8888')
-    .POST(fe_body)
-    .build().execute().then(onComplete).catch(onError);
+new RequestBuilder().url('http://httpbin.org/post').POST(fe_body).buildAndExecute().then(onComplete).catch(onError);
 
+// MultiPart POST - Google Drive demo
+// to obtain token, use https://developers.google.com/oauthplayground/
+let json = JSON.stringify({title:'test'});
 
-//request 3
-let json = JSON.stringify({'title':'test'});
-
-let mp_body = new MultiPartBuilder().addPart(RequestBody.create(json,  new MimeBuilder().contentType('application/json', 'charset', 'UTF-8').build()))
+let mp_body = new MultiPartBuilder().addPart(RequestBody.create(json, 'Content-Type: application/json; charset=UTF-8'))
                                     .addPart(RequestBody.create(image, new MimeBuilder().contentType('image/jpeg').contentTransferEncoding('binary').build()))
                                     .type(MultiPartBuilder.FORMDATA).build();
 
 var req3 = new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart')
-                               .header('Authorization', 'Bearer ya29.TAIWYl-tlbNcrhLfNPWuWZyqOMIZWKEDVJ2OhfWseWlqTMWGBO7KGGqIFTSbv9ritsfk')
-                               .POST(mp_body)
-                               .execute().then(onComplete).catch(onError);
-
-
-
-
-//var req = new RequestBuilder().GET('http://127.0.0.1:8888').build().execute().then(onComplete).catch(onError);
-
-
+                               .header('Authorization', 'Bearer ya29.TgLsOizI1Jsu20td_jo7qgbxPCibgVGZzQwy0LGbXeTPWxRNJboJtSc_KdvpFaKeU7Xj')
+                               .POST(mp_body).buildAndExecute().then(onComplete).catch(onError);
