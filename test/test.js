@@ -1,25 +1,27 @@
 'use strict';
 
+/**
+ *
+ * @param msg a {data, response, request} Object
+ */
 function onComplete(msg) {
     console.log('onComplete::: ' + msg.data + ' ****** ' + msg.response.statusCode);
 }
 function onError(msg) {
-    console.log('onError::: ' + msg);
+    console.err('onError::: ' + msg);
 }
 
 const fs                    = require('fs');
 const path                  = require('path');
 
-var image                   = fs.readFileSync(path.resolve(__dirname, 'test.jpg'));
+const okhttp                = require('../');
 
-var base                    = require('../lib/index');
-
-var MimeBuilder             = base.MimeBuilder;
-var Request                 = base.Request;
-var RequestBody             = base.RequestBody;
-var RequestBuilder          = base.RequestBuilder;
-var FormEncodingBuilder     = base.FormEncodingBuilder;
-var MultiPartBuilder        = base.MultiPartBuilder;
+var MimeBuilder             = okhttp.MimeBuilder;
+var Request                 = okhttp.Request;
+var RequestBody             = okhttp.RequestBody;
+var RequestBuilder          = okhttp.RequestBuilder;
+var FormEncodingBuilder     = okhttp.FormEncodingBuilder;
+var MultiPartBuilder        = okhttp.MultiPartBuilder;
 
 // Simple GET
 new RequestBuilder().GET('http://google.com').buildAndExecute().then(onComplete).catch(onError);
@@ -36,12 +38,13 @@ new RequestBuilder().url('http://httpbin.org/post').POST(fe_body).buildAndExecut
 
 // MultiPart POST - Google Drive demo
 // to obtain token, use https://developers.google.com/oauthplayground/
-let json = JSON.stringify({title:'test'});
+let json    = JSON.stringify({title:'test'});
+var image   = fs.readFileSync(path.resolve(__dirname, 'test.jpg'));
 
 let mp_body = new MultiPartBuilder().addPart(RequestBody.create(json, 'Content-Type: application/json; charset=UTF-8'))
                                     .addPart(RequestBody.create(image, new MimeBuilder().contentType('image/jpeg').contentTransferEncoding('binary').build()))
                                     .type(MultiPartBuilder.FORMDATA).build();
 
-var req3 = new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart')
-                               .header('Authorization', 'Bearer OAUTH2_TOKEN_HERE')
-                               .POST(mp_body).buildAndExecute().then(onComplete).catch(onError);
+new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploadType=multipart')
+                    .header('Authorization', 'Bearer OAUTH2_TOKEN_HERE')
+                    .POST(mp_body).buildAndExecute().then(onComplete).catch(onError);
