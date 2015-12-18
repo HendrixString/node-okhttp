@@ -1,7 +1,9 @@
-# node-OK HttP
+# node-OkHttP
 a lightweight `HTTP` library for `Node.js` inspired by `Square's OkHttp` Builder patterns and flavours
 for constructing a legit `HTTP` requests of all types in `Android`.
 Written entirely in EcmaScript 6 (Harmony) and transpiled with `Babel`.
+
+[![NPM](https://nodei.co/npm/okhttp.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/okhttp/)
 
 ## How to use
 - `npm install okhttp`
