@@ -48,10 +48,18 @@ private function onError(err):void {
 ```
 
 
-###### 1) Simple `GET` request
+###### 1) Simple textual `GET` request
 
 ```
 new RequestBuilder().GET('http://google.com').buildAndExecute().then(onComplete).catch(onError);
+
+```
+
+###### 2) Simple binary `GET` request
+- data returns as a buffer
+
+```
+new RequestBuilder().GET('http://maps.google.com/mapfiles/kml/pushpin/blue-pushpin.png').bufferResponse().buildAndExecute().then(onComplete).catch(onError);
 
 ```
 

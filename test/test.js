@@ -5,10 +5,10 @@
  * @param msg a {data, response, request} Object
  */
 function onComplete(msg) {
-    console.log('onComplete::: ' + msg.data + ' ****** ' + msg.response.statusCode);
+    console.log('data ' + msg.data + ', response ' + msg.response.statusCode + ', request ' + msg.request.method);
 }
 function onError(msg) {
-    console.err('onError::: ' + msg);
+    console.error('onError::: ' + msg);
 }
 
 const fs                    = require('fs');
@@ -23,9 +23,13 @@ var RequestBuilder          = okhttp.RequestBuilder;
 var FormEncodingBuilder     = okhttp.FormEncodingBuilder;
 var MultiPartBuilder        = okhttp.MultiPartBuilder;
 
-// Simple GET
+// Simple textual GET
 new RequestBuilder().GET('http://google.com').buildAndExecute().then(onComplete).catch(onError);
 
+// Simple binary GET
+new RequestBuilder().GET('http://maps.google.com/mapfiles/kml/pushpin/blue-pushpin.png').bufferResponse().buildAndExecute().then(onComplete).catch(onError);
+
+//
 // Simple JSON POST
 new RequestBuilder().url('http://httpbin.org/post')
                     .POST(RequestBody.create({a:'a1', b:'b1'}, new MimeBuilder().contentType('application/json', 'charset', 'utf8').build()))
