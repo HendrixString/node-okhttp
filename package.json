@@ -7,6 +7,10 @@
     "okhttp",
     "babel",
     "node",
+    "multipart",
+    "form",
+    "formencoding",
+    "get",
     "hendrixstring"
   ],
   "main": "lib/index.js",
