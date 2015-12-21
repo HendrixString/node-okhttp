@@ -82,7 +82,7 @@ new RequestBuilder().url('http://httpbin.org/post').POST(fe_body).buildAndExecut
 
 ```
 
-###### 4) `MultiPart` request: 
+#### 4) `MultiPart` request: 
 - send a multipart file upload request to Google Drive API
 - to obtain token, use [https://developers.google.com/oauthplayground/](https://developers.google.com/oauthplayground/)
 ```
@@ -99,7 +99,7 @@ new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploa
 
 ```
 
-###### 4) `POST` image request
+#### 5) `POST` image request
 - send an image into `Google Glass Mirror API`
 
 ```
