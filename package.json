@@ -1,6 +1,6 @@
 {
   "name": "okhttp",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "http client for node, inspired by Square's Android OkHttp",
   "keywords": [
     "http",
