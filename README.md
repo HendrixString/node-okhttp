@@ -48,14 +48,14 @@ private function onError(err):void {
 ```
 
 
-###### 1) Simple textual `GET` request
+#### 1) Simple textual `GET` request
 
 ```
 new RequestBuilder().GET('http://google.com').buildAndExecute().then(onComplete).catch(onError);
 
 ```
 
-###### 2) Simple binary `GET` request
+#### 2) Simple binary `GET` request
 - data returns as a buffer
 
 ```
@@ -63,7 +63,7 @@ new RequestBuilder().GET('http://maps.google.com/mapfiles/kml/pushpin/blue-pushp
 
 ```
 
-###### 2) Simple `JSON POST` request
+#### 2) Simple `JSON POST` request
 
 ```
 new RequestBuilder().url('http://httpbin.org/post')
@@ -72,16 +72,17 @@ new RequestBuilder().url('http://httpbin.org/post')
 
 ```
 
-###### 3) `Form Encoding POST (www-form-urlencoded)` request
+#### 3) `Form Encoding POST (www-form-urlencoded)` request
 
 ```
 let fe_body = new FormEncodingBuilder().add('key1', 'value1').add('key2', 'value2').build();
 
-new RequestBuilder().url('http://httpbin.org/post').POST(fe_body).buildAndExecute().then(onComplete).catch(onError);
+new RequestBuilder().url('http://httpbin.org/post').POST(fe_body).buildAndExecute()
+                    .then(onComplete).catch(onError);
 
 ```
 
-###### 4) `MultiPart` request: 
+#### 4) `MultiPart` request: 
 - send a multipart file upload request to Google Drive API
 - to obtain token, use [https://developers.google.com/oauthplayground/](https://developers.google.com/oauthplayground/)
 ```
@@ -98,7 +99,7 @@ new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploa
 
 ```
 
-###### 4) `POST` image request
+#### 5) `POST` image request
 - send an image into `Google Glass Mirror API`
 
 ```
