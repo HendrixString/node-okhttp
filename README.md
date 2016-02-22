@@ -24,7 +24,7 @@ then use)
 - most important: quick and easy to use.
 
 ## Guide
-```
+```javascript
 const okhttp                = require('okhttp');
 
 var MimeBuilder             = okhttp.MimeBuilder;
@@ -50,7 +50,7 @@ private function onError(err):void {
 
 #### 1) Simple textual `GET` request
 
-```
+```javascript
 new RequestBuilder().GET('http://google.com').buildAndExecute().then(onComplete).catch(onError);
 
 ```
@@ -58,14 +58,14 @@ new RequestBuilder().GET('http://google.com').buildAndExecute().then(onComplete)
 #### 2) Simple binary `GET` request
 - data returns as a buffer
 
-```
+```javascript
 new RequestBuilder().GET('http://maps.google.com/mapfiles/kml/pushpin/blue-pushpin.png').bufferResponse().buildAndExecute().then(onComplete).catch(onError);
 
 ```
 
 #### 2) Simple `JSON POST` request
 
-```
+```javascript
 new RequestBuilder().url('http://httpbin.org/post')
                     .POST(RequestBody.create({a:'a1', b:'b1'}, new MimeBuilder().contentType('application/json', 'charset', 'utf8').build()))
                     .buildAndExecute().then(onComplete).catch(onError);
@@ -74,7 +74,7 @@ new RequestBuilder().url('http://httpbin.org/post')
 
 #### 3) `Form Encoding POST (www-form-urlencoded)` request
 
-```
+```javascript
 let fe_body = new FormEncodingBuilder().add('key1', 'value1').add('key2', 'value2').build();
 
 new RequestBuilder().url('http://httpbin.org/post').POST(fe_body).buildAndExecute()
@@ -85,7 +85,7 @@ new RequestBuilder().url('http://httpbin.org/post').POST(fe_body).buildAndExecut
 #### 4) `MultiPart` request: 
 - send a multipart file upload request to Google Drive API
 - to obtain token, use [https://developers.google.com/oauthplayground/](https://developers.google.com/oauthplayground/)
-```
+```javascript
 let json    = JSON.stringify({title:'test'});
 var image   = fs.readFileSync(path.resolve(__dirname, 'test.jpg'));
 
@@ -102,7 +102,7 @@ new RequestBuilder().url('https://www.googleapis.com/upload/drive/v2/files?uploa
 #### 5) `POST` image request
 - send an image into `Google Glass Mirror API`
 
-```
+```javascript
 public function uploadImage(image, itemId, oauthToken):void {
 
       var body = RequestBody.create(image, 'Content-Type: image/png');
