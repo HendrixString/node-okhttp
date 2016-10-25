@@ -17,7 +17,8 @@
   "scripts": {
     "test": "node test/test.js",
     "build": "babel src --out-dir lib",
-    "prepublish": "npm run build"
+    "prepublish": "npm run clean && npm run build",
+    "clean": "rm -r lib/*"
   },
   "engines": {
     "node": "*"

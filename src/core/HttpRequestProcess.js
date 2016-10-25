@@ -3,9 +3,9 @@
 import {objectToQueryString} from '../utils/FormatUtils.js'
 import BaseWorker            from './BaseWorker'
 
-const url           = require('url');
-const http          = require('http');
-const https         = require('https');
+import url from 'url';
+import http from 'http';
+import https from 'https';
 
 const TAG           = 'HttpRequestProcess:: ';
 

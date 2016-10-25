@@ -7,11 +7,4 @@ import MimeBuilder          from './builders/MimeBuilder';
 import MultiPartBuilder     from './builders/MultiPartBuilder';
 import RequestBuilder       from './builders/RequestBuilder';
 
-module.exports = {
-    Request:                Request,
-    RequestBody:            RequestBody,
-    FormEncodingBuilder:    FormEncodingBuilder,
-    MimeBuilder:            MimeBuilder,
-    MultiPartBuilder:       MultiPartBuilder,
-    RequestBuilder:         RequestBuilder
-};
+export {Request, RequestBody, FormEncodingBuilder, MimeBuilder, MultiPartBuilder, RequestBuilder};
