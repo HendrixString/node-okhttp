@@ -1,4 +1,4 @@
-# node-OkHttP
+# node-OkHttP   [![npm](https://img.shields.io/npm/dt/okhttp.svg)](https://www.npmjs.com/package/okhttp)  
 a lightweight `HTTP` library for `Node.js` inspired by `Square's Android OkHttp` Builder patterns and flavours
 for constructing a legit `HTTP` requests of all types.
 Written entirely in EcmaScript 6 (Harmony) and transpiled with `Babel`.
